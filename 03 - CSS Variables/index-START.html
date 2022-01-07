@@ -39,19 +39,19 @@
     <style>
       /* 사용자 지정 속성 */
       :root {
-        --base-color: #ffc600;
+        --base: #ffc600;
         --spacing: 10px;
         --blur: 10px;
       }
 
       img {
-        background-color: var(--base-color);
+        background-color: var(--base);
         padding: var(--spacing);
         filter: blur(var(--blur));
       }
 
       .hl {
-        color: var(--base-color);
+        color: var(--base);
       }
       /*
       misc styles, nothing to do with CSS variables
@@ -75,6 +75,16 @@
       }
     </style>
 
-    <script></script>
+    <script>
+      // controls 가져오기
+      const inputs = document.querySelectorAll(".controls input");
+
+      function handleUpdate() {
+        const root = document.documentElement.style; // css에서 :root에 해당됨.
+        const unit = this.dataset.sizing || ""; // dataset으로 사용자 정의 attribute인 'data-속성' 에 접근할 수 있다.
+        root.setProperty(`--${this.name}`, this.value + unit); // css 속성 설정.
+      }
+      inputs.forEach((input) => input.addEventListener("change", handleUpdate));
+    </script>
   </body>
 </html>
