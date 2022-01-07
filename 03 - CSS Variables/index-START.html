@@ -37,6 +37,22 @@
     <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500" />
 
     <style>
+      /* 사용자 지정 속성 */
+      :root {
+        --base-color: #ffc600;
+        --spacing: 10px;
+        --blur: 10px;
+      }
+
+      img {
+        background-color: var(--base-color);
+        padding: var(--spacing);
+        filter: blur(var(--blur));
+      }
+
+      .hl {
+        color: var(--base-color);
+      }
       /*
       misc styles, nothing to do with CSS variables
     */
