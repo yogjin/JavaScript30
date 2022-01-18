@@ -81,6 +81,7 @@
 
       function handleUpdate() {
         const root = document.documentElement.style; // css에서 :root에 해당됨.
+        console.log(root);
         const unit = this.dataset.sizing || ""; // dataset으로 사용자 정의 attribute인 'data-속성' 에 접근할 수 있다.
         root.setProperty(`--${this.name}`, this.value + unit); // css 속성 설정.
       }
