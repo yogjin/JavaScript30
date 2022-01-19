@@ -16,6 +16,70 @@
     <script>
       const endpoint =
         'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+      // 도시목록
+      const cities = [];
+
+      // fetch 해온 도시목록 설정
+      async function setCities() {
+        let response = await fetch(endpoint);
+        if (response.ok) {
+          let json = await response.json();
+          cities.push(...json); // const는 재할당불가, 값 추가,삭제는 가능
+        }
+      }
+      setCities();
+
+      // findMatches
+      // cities 배열안에 있는 city, state 이름 과 검색단어가 일치하는 city를
+      // RegExp 인스턴스 와, match 함수를 이용해 찾아서 return
+      function findMatches(wordToMatch, cities) {
+        return (result = cities.filter((place) => {
+          // wordToMatch를 포함하고, 글로벌(g)(returns all matches) 및 대/소문자 무시(i) 플래그 사용
+          const re = new RegExp(wordToMatch, 'gi');
+          return place.city.match(re) || place.state.match(re);
+        }));
+      }
+
+      // 검색창 addEventListener: 입력이 있으면, displayMatch함수 실행
+      const searchInput = document.querySelector('.search');
+      searchInput.addEventListener('keyup', displayMatch);
+
+      // displayMatch
+      // findMatches 해서 검색결과 보여주기
+      // 백틱기호를 활용한 string Template 이용
+      function displayMatch(e) {
+        const suggestions = document.querySelector('.suggestions');
+        const matchArray = findMatches(this.value, cities);
+
+        // 배열: map 사용해 각 원소를 li로 바꾼다
+        // 배열.join("")으로 string으로 바꾼다.
+        const html = matchArray
+          .map((place) => {
+            // 검색단어에 highlight 하기위해 regex, replace이용
+            const re = new RegExp(this.value, 'gi');
+            const cityName = place.city.replace(
+              re,
+              `<span class="hl">${this.value}</span>`
+            );
+            const stateName = place.state.replace(
+              re,
+              `<span class="hl">${this.value}</span>`
+            );
+            const population = numberWithCommas(place.population);
+            return `
+            <li>
+              <span class="name">${cityName}, ${stateName}</span>
+              <span class="population">${population}</span>
+            </li>
+          `;
+          })
+          .join('');
+        suggestions.innerHTML = html;
+      }
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      }
     </script>
   </body>
 </html>
