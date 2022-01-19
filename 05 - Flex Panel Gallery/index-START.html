@@ -32,6 +32,8 @@
       .panels {
         min-height: 100vh;
         overflow: hidden;
+        /* flex 적용: 좌우로 정렬 */
+        display: flex;
       }
 
       .panel {
@@ -47,6 +49,10 @@
         font-size: 20px;
         background-size: cover;
         background-position: center;
+        flex: 1; /* 각 panel들이 차지할 비율을 일정하게. 1*/
+        display: flex;
+        flex-direction: column; /* flex 적용방향: 세로*/
+        justify-content: center; /* flex 자식 중앙정렬*/
       }
 
       .panel1 {
@@ -70,6 +76,30 @@
         margin: 0;
         width: 100%;
         transition: transform 0.5s;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* 위 아래 문자열 올려진 상태에서 패널이 열리면 내리기*/
+      .panel > *:first-child {
+        transform: translateY(-100%);
+      }
+      .panel.open-active > *:first-child {
+        transform: translateY(0);
+      }
+      .panel > *:last-child {
+        transform: translateY(100%);
+      }
+      .panel.open-active > *:last-child {
+        transform: translateY(0);
+      }
+
+      /* 패널이 열리면 글자크기, flex 범위 늘리기*/
+      .panel.open {
+        flex: 5;
+        font-size: 40px;
       }
 
       .panel p {
@@ -81,10 +111,6 @@
 
       .panel p:nth-child(2) {
         font-size: 4em;
-      }
-
-      .panel.open {
-        font-size: 40px;
       }
     </style>
 
@@ -116,6 +142,33 @@
       </div>
     </div>
 
-    <script></script>
+    <script>
+      // panel 펼치기
+      // Element.classList.toggle('string')
+      // <element class="string"> 클래스 값 추가
+      function toggleOpen() {
+        this.classList.toggle('open');
+      }
+
+      // 글자 보이기
+      // class: open-active추가
+      function toggleActive(e) {
+        // transition를 적용한 요소가 2개(font-size, flex-grow)이기 때문에 하나만 event를 적용해야한다
+        // this.classList.toggle('open-active');
+        if (e.propertyName == 'font-size') {
+          this.classList.toggle('open-active');
+        }
+      }
+
+      const panels = document.querySelectorAll('.panel');
+
+      // panel 클릭 시 펼치기
+      panels.forEach((panel) => panel.addEventListener('click', toggleOpen));
+
+      // 변화가 끝나면(transitionend), 위 아래 글씨도 보여주기.
+      panels.forEach((panel) =>
+        panel.addEventListener('transitionend', toggleActive)
+      );
+    </script>
   </body>
 </html>
