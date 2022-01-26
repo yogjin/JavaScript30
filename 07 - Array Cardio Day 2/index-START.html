@@ -24,15 +24,26 @@
         { text: 'Nice Nice Nice!', id: 542328 },
       ];
 
-      // Some and Every Checks
+      // 1. Some and Every Checks
       // Array.prototype.some() // is at least one person 19 or older?
+      // 하나라도 true면 true
+      const haveAdult = people.some((person) => {
+        const year = new Date().getFullYear();
+        return year - person.year >= 19;
+      });
+      console.log(haveAdult); // true
       // Array.prototype.every() // is everyone 19 or older?
+      // 전부다 true인지 확인
+      const isAllAdult = people.every((person) => {
+        return new Date().getFullYear() - person.year >= 19;
+      });
+      console.log(isAllAdult); // false
 
-      // Array.prototype.find()
+      // 2. Array.prototype.find()
       // Find is like filter, but instead returns just the one you are looking for
       // find the comment with the ID of 823423
 
-      // Array.prototype.findIndex()
+      // 3. Array.prototype.findIndex()
       // Find the comment with this ID
       // delete the comment with the ID of 823423
     </script>
