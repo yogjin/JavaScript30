@@ -41,11 +41,14 @@
       // Testing 거짓이면 로그출력
       const p = document.querySelector('p');
       console.assert(p.classList.contains('break'), 'false');
-      console.assert(p.classList.contains('down'), 'false');
+      console.assert(p.classList.contains('down'), 'false'); // 출력
 
       // clearing
+      console.clear(); // 콘솔창 clear
 
       // Viewing DOM Elements
+      console.log(p);
+      console.dir(p);
 
       // Grouping together
 
