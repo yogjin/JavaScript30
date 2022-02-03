@@ -99,11 +99,21 @@
       let lastChecked; // 마지막에 체크한 박스
 
       function handleCheck(e) {
+        let inBetween = false;
         // 시프트 키를 누른 상태로 박스를 체크했을때 && 체크했을때(취소가 아닌)
         if (e.shiftKey && this.checked) {
           // 이전 박스와 현재 체크한 박스 사이에 있는 box들을 체크
+          checkboxes.forEach((checkbox) => {
+            if (checkbox.checked || checkbox === lastChecked) {
+              // 체크한 박스나 이전에 체크한 박스를 만나면 inBetween bool 바꿔주기
+              inBetween = !inBetween;
+            }
+            if (inBetween) {
+              checkbox.checked = true; // 체크
+            }
+          });
         }
-        lastChecked = this;
+        lastChecked = this; // 체크한 박스 저장
       }
       checkboxes.forEach((checkbox) => {
         checkbox.addEventListener('click', handleCheck);
