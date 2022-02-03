@@ -60,10 +60,18 @@
       });
 
       // counting
-      console.count('cnt');
-      console.count('cnt');
+      console.count('cnt'); // cnt: 1
+      console.count('cnt'); // cnt: 2
 
       // timing
+      // 시간측정
+      console.time('fetching my repos');
+      fetch('https://api.github.com/users/yogjin/repos') // yogjin github의 repo들 가져오기
+        .then((data) => data.json())
+        .then((data) => {
+          console.log(data);
+          console.timeEnd('fetching my repos');
+        });
     </script>
   </body>
 </html>
