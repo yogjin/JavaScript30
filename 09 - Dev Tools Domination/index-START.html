@@ -48,9 +48,16 @@
 
       // Viewing DOM Elements
       console.log(p);
-      console.dir(p);
+      console.dir(p); // element의 api와 모든속성들을 보여준다
 
       // Grouping together
+      // console.group('flag') ... console.groupEnd('flag')
+      dogs.forEach((dog) => {
+        console.group(`${dog.name}`);
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.age} years old`);
+        console.groupEnd(`${dog.name}`);
+      });
 
       // counting
 
