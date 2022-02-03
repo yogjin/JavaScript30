@@ -94,6 +94,16 @@
       </div>
     </div>
 
-    <script></script>
+    <script>
+      const checkboxes = document.querySelectorAll(`input[type='checkbox']`);
+      let lastChecked; // 마지막에 체크한 박스
+
+      function handleCheck(e) {
+        lastChecked = this;
+      }
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', handleCheck);
+      });
+    </script>
   </body>
 </html>
