@@ -20,9 +20,14 @@ function updateVolume(e) {
   video.volume = this.value;
 }
 
+function updatePlaybackRate() {
+  video.playbackRate = this.value;
+}
+
 /*  EventListener */
 video.addEventListener('click', playVideo);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 toggle.addEventListener('click', playVideo);
 volume.addEventListener('change', updateVolume);
+playbackRate.addEventListener('change', updatePlaybackRate);
