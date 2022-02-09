@@ -35,8 +35,8 @@ video.addEventListener('click', playVideo);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 toggle.addEventListener('click', playVideo);
-volume.addEventListener('change', updateVolume);
-playbackRate.addEventListener('change', updatePlaybackRate);
+volume.addEventListener('mousemove', updateVolume);
+playbackRate.addEventListener('mousemove', updatePlaybackRate);
 skipButtons.forEach((skipButton) => {
   skipButton.addEventListener('click', handleSkip);
 });
