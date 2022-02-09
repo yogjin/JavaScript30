@@ -8,6 +8,14 @@ function playVideo() {
   video[method]();
 }
 
+// toggle icon 변경
+function updateButton() {
+  const icon = this.paused ? '►' : '❚ ❚';
+  toggle.innerHTML = icon;
+}
+
 /*  EventListener */
 video.addEventListener('click', playVideo);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
 toggle.addEventListener('click', playVideo);
