@@ -3,6 +3,7 @@ const progress = document.querySelector('.progress');
 const toggle = document.querySelector('.toggle');
 const volume = document.querySelectorAll('.player__slider')[0];
 const playbackRate = document.querySelectorAll('.player__slider')[1];
+const skipButtons = document.querySelectorAll('[data-skip]');
 
 /* function */
 function playVideo() {
@@ -24,6 +25,11 @@ function updatePlaybackRate() {
   video.playbackRate = this.value;
 }
 
+function handleSkip() {
+  const value = this.dataset.skip;
+  video.currentTime += parseFloat(value);
+}
+
 /*  EventListener */
 video.addEventListener('click', playVideo);
 video.addEventListener('play', updateButton);
@@ -31,3 +37,6 @@ video.addEventListener('pause', updateButton);
 toggle.addEventListener('click', playVideo);
 volume.addEventListener('change', updateVolume);
 playbackRate.addEventListener('change', updatePlaybackRate);
+skipButtons.forEach((skipButton) => {
+  skipButton.addEventListener('click', handleSkip);
+});
