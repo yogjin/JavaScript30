@@ -52,4 +52,8 @@ playbackRate.addEventListener('mousemove', updatePlaybackRate);
 skipButtons.forEach((skipButton) => {
   skipButton.addEventListener('click', handleSkip);
 });
+let mousedown;
 progress.addEventListener('click', scrubVideo);
+progress.addEventListener('mousemove', (e) => mousedown && scrubVideo(e));
+progress.addEventListener('mousedown', () => (mousedown = true));
+progress.addEventListener('mouseup', () => (mousedown = false));
