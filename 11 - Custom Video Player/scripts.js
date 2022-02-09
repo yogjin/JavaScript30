@@ -36,6 +36,11 @@ function handleProgressBar(e) {
   progressBar.style.flexBasis = `${percent}%`;
 }
 
+function scrubVideo(e) {
+  video.currentTime =
+    video.duration * (e.offsetX / progress.getBoundingClientRect().width);
+}
+
 /*  EventListener */
 video.addEventListener('click', playVideo);
 video.addEventListener('play', updateButton);
@@ -47,3 +52,4 @@ playbackRate.addEventListener('mousemove', updatePlaybackRate);
 skipButtons.forEach((skipButton) => {
   skipButton.addEventListener('click', handleSkip);
 });
+progress.addEventListener('click', scrubVideo);
